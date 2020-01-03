@@ -19,8 +19,8 @@ export class SuperheroesComponent implements OnInit {
   loading$: Observable<boolean>;
 
   constructor(store: Store<PartialSuperheroesState>) {
-    this.superheroes$ = store.select('superheroes').pipe(map(superheroesAdapter.getSelectors().selectAll));
-    // this.superheroes$.subscribe();
+    this.superheroes$ = store.select('superheroes')
+      .pipe(map(superheroesAdapter.getSelectors().selectAll));
   }
 
   ngOnInit() {}
