@@ -6,6 +6,7 @@ import { Superhero } from './superhero.model';
 
 export interface SuperheroesState extends EntityState<Superhero> {
     selectedSuperhero: Superhero;
+    loading: boolean;
 }
 
 export interface PartialSuperheroesState {
@@ -15,13 +16,24 @@ export interface PartialSuperheroesState {
 export const superheroesAdapter: EntityAdapter<Superhero> = createEntityAdapter<Superhero>();
 
 export const initialState: SuperheroesState = superheroesAdapter.getInitialState({
-    selectedSuperhero: null
+    selectedSuperhero: null,
+    loading: false
 });
 
 const superheroesReducer = createReducer(
     initialState,
-    on(SuperheroActions.superheroesFetched, (state, { superheroes }) => superheroesAdapter.addAll(superheroes, state)),
-    on(SuperheroActions.superheroFetched, (state, { selectedSuperhero }) => ({
+    on(SuperheroActions.superheroesFetch, (state) => ({
+        ...state,
+        loading: true
+    })),
+    on(SuperheroActions.superheroesFetchedSuccess, (state, { superheroes }) => {
+        const sState = superheroesAdapter.addAll(superheroes, state);
+        return {
+            ...sState,
+            loading: false
+        };
+    }),
+    on(SuperheroActions.superheroFetchedSuccess, (state, { selectedSuperhero }) => ({
         ...state,
         selectedSuperhero
     })),

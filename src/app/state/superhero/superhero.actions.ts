@@ -2,14 +2,30 @@ import { createAction, props } from '@ngrx/store';
 
 import { Superhero } from './superhero.model';
 
-export const superheroesFetched = createAction(
-    '[Superheroes] Superheroes Fetched',
+export const superheroesFetch = createAction(
+    '[Superheroes] Superheroes Fetch'
+);
+
+export const superheroesFetchedSuccess = createAction(
+    '[Superheroes] Superheroes Fetched Success',
     props<{ superheroes: Superhero[]; }>()
 );
 
-export const superheroFetched = createAction(
-    '[Superhero] Superhero Fetched',
+export const superheroesFetchedError = createAction(
+    '[Superheroes] Superheroes Fetched Error'
+);
+
+export const superheroFetch = createAction(
+    '[Superheroes] Superhero Fetch'
+);
+
+export const superheroFetchedSuccess = createAction(
+    '[Superhero] Superhero Fetched Success',
     props<{ selectedSuperhero: Superhero }>()
+);
+
+export const superheroFetchedError = createAction(
+    '[Superheroes] Superhero Fetched Error'
 );
 
 export const unloadSelectedSuperhero = createAction(
