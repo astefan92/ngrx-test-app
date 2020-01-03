@@ -1,0 +1,10 @@
+<mat-card class="superhero" *ngIf="superhero$ | async as superhero">
+    <mat-card-header>
+        <mat-card-title>{{ superhero.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ superhero.description }}
+        </p>
+    </mat-card-content>
+</mat-card>
